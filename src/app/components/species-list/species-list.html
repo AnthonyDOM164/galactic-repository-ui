@@ -1,0 +1,17 @@
+<div class="container mt-4">
+  <h2 class="text-light mb-4">Galactic Explorers</h2>
+  <div class="row">
+    <div class="col-md-4 mb-3" *ngFor="let s of species">
+      <div class="card bg-dark text-white border-primary h-100">
+        <div class="card-body text-center">
+          <h5 class="card-title text-info">{{ s.name }}</h5>
+          <p class="card-text">
+            <strong>Power:</strong> {{ s.powerLevel }} <br>
+            <small class="text-muted">{{ s.specialAbility }}</small>
+          </p>
+          <div class="badge bg-warning text-dark">Victories: {{ s.victories }}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

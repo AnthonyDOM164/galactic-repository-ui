@@ -1,0 +1,37 @@
+<div class="card shadow border-0 bg-dark text-white">
+  <div class="card-header bg-warning text-dark text-center py-3">
+    <h5 class="mb-0 fw-bold"><i class="bi bi-trophy-fill me-2"></i>HALL OF FAME</h5>
+  </div>
+  <div class="card-body p-0">
+    <table class="table table-dark table-hover mb-0">
+      <thead>
+      <tr class="text-info small text-uppercase">
+        <th class="ps-3">Pos</th>
+        <th>Especie</th>
+        <th class="text-center">Victorias</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let s of ranking; let i = index">
+        <td class="ps-3">
+            <span [ngClass]="{'gold': i===0, 'silver': i===1, 'bronze': i===2}">
+              #{{ i + 1 }}
+            </span>
+        </td>
+        <td>
+          <div class="fw-bold">{{ s.name }}</div>
+          <small class="text-muted text-truncate d-block" style="max-width: 120px;">
+            {{ s.specialAbility }}
+          </small>
+        </td>
+        <td class="text-center">
+          <span class="badge rounded-pill bg-info text-dark">{{ s.victories }}</span>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div *ngIf="ranking.length === 0" class="p-4 text-center text-muted">
+      Esperando el primer combate...
+    </div>
+  </div>
+</div>

@@ -1,37 +1,20 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { SpeciesService } from './services/species.service';
-import { Species } from './models/species.model';
-import { CommonModule } from '@angular/common';
+import {Component, inject, OnInit} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {SpeciesList} from './components/species-list/species-list';
+import {SpeciesForm} from './components/species-form/species-form';
+import {TournamentRanking} from './components/tournament-ranking/tournament-ranking';
+import {SpeciesService} from './services/species.service';
 
 @Component({
-  selector: 'app-root',
+  selector: "app-root",
   standalone: true,
-  imports: [RouterOutlet, CommonModule],
-  template: `
-    <h1>Galactic Tournament</h1>
-    <p>Revisando conexión con Render...</p>
-
-    <ul *ngIf="speciesList.length > 0">
-      <li *ngFor="let s of speciesList">
-        {{ s.name }} - Poder: {{ s.powerLevel }}
-      </li>
-    </ul>
-  `
+  imports: [SpeciesList, SpeciesForm, TournamentRanking, CommonModule],
+  templateUrl: './app.html'
 })
-export class App {
+export class App implements OnInit {
   private speciesService = inject(SpeciesService);
-  speciesList: Species[] = [];
 
   ngOnInit(): void {
-    this.speciesService.getSpecies().subscribe({
-      next: (data) => {
-        console.log('¡Conexión exitosa! Datos recibidos:', data);
-        this.speciesList = data;
-      },
-      error: (err) => {
-        console.error('Error conectando a Render:', err);
-      }
-    });
+    this.speciesService.triggerRefresh();
   }
 }

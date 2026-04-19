@@ -1,0 +1,39 @@
+<div class="card shadow border-0 bg-dark text-white">
+  <div class="card-header bg-primary text-center py-3">
+    <h5 class="mb-0 fw-bold"><i class="bi bi-rocket-takeoff-fill me-2"></i>NUEVA ESPECIE</h5>
+  </div>
+  <div class="card-body p-4">
+    <form [formGroup]="speciesForm" (ngSubmit)="onSubmit()">
+
+      <div class="mb-3">
+        <label class="form-label small text-uppercase fw-bold text-info">Nombre de Especie</label>
+        <input type="text" formControlName="name"
+               class="form-control bg-secondary text-white border-0"
+               [class.is-invalid]="isInvalid('name')"
+               placeholder="Ej: Saiyan">
+        <div class="invalid-feedback">Mínimo 3 caracteres galácticos.</div>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small text-uppercase fw-bold text-info">Nivel de Poder
+          ({{ speciesForm.get('powerLevel')?.value }})</label>
+        <input type="range" formControlName="powerLevel"
+               class="form-range" min="1" max="300">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label small text-uppercase fw-bold text-info">Habilidad Especial</label>
+        <input type="text" formControlName="specialAbility"
+               class="form-control bg-secondary text-white border-0"
+               [class.is-invalid]="isInvalid('specialAbility')"
+               placeholder="Ej: Mimetismo">
+      </div>
+
+      <button type="submit" [disabled]="speciesForm.invalid || loading"
+              class="btn btn-info w-100 fw-bold mt-2 py-2">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
+        {{ loading ? 'TRANSMITIENDO...' : 'REGISTRAR ESPECIE' }}
+      </button>
+    </form>
+  </div>
+</div>
