@@ -2,13 +2,15 @@ import {Component, EventEmitter, Output, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/forms';
 import {SpeciesService} from '../../services/species.service';
+import {TranslateModule} from '@ngx-translate/core';
 
 @Component({
   selector: 'app-species-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
   templateUrl: './species-form.html'
 })
+
 export class SpeciesForm {
   private fb = inject(FormBuilder);
   private speciesService = inject(SpeciesService);

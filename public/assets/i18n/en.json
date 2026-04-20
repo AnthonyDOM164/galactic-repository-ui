@@ -1,0 +1,25 @@
+{
+  "APP": {
+    "TITLE": "Galactic Tournament"
+  },
+  "SPECIES": {
+    "FORM_TITLE_ADD": "Register New Species",
+    "FORM_TITLE_ADD_BUTTON": "REGISTER SPECIES",
+    "RANKING_TITTLE": "RANKING",
+    "LOADING_BUTTON": "LOADING...",
+    "FIELDS_FORM_ADD": {
+      "NAME": "NAME",
+      "NAME_PLACEHOLDER": "Human",
+      "NAME_ERROR": "Min 3 characters",
+      "POWER": "POWER LEVEL",
+      "SA": "SPECIAL ABILITY",
+      "SA_PLACEHOLDER": "Fly"
+    },
+    "FIELDS": {
+      "NAME": "Name: ",
+      "POWER": "Power: ",
+      "VICTORIES": "Victories: ",
+      "SA": "Special Ability: "
+    }
+  }
+}

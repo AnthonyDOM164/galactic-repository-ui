@@ -1,0 +1,25 @@
+{
+  "APP": {
+    "TITLE": "El Torneo Galáctico"
+  },
+  "SPECIES": {
+    "FORM_TITLE_ADD": "Registrar Nueva Especie",
+    "FORM_TITLE_ADD_BUTTON": "REGISTRAR ESPECIE",
+    "RANKING_TITTLE": "RANKING",
+    "LOADING_BUTTON": "CARGANDO...",
+    "FIELDS_FORM_ADD": {
+      "NAME": "NOMBRE ",
+      "NAME_PLACEHOLDER": "Human",
+      "NAME_ERROR": "Mínimo 3 caracteres",
+      "POWER": "NIVEL DE PODER",
+      "SA": "HABILIDAD ESPECIAL",
+      "SA_PLACEHOLDER": "Volar"
+    },
+    "FIELDS": {
+      "NAME": "Nombre: ",
+      "POWER": "Poder: ",
+      "VICTORIES": "Victorias: ",
+      "SA": "Habilidad Especial: "
+    }
+  }
+}
