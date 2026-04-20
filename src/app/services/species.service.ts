@@ -33,7 +33,7 @@ export class SpeciesService {
     return this.http.post<Species>(this.apiUrl, species);
   }
 
-  battle(id1: number, id2: number): Observable<Species> {
+  startCombat(id1: number, id2: number): Observable<Species> {
     return this.http.post<Species>(`${this.apiUrl}/battle?id1=${id1}&id2=${id2}`, {});
   }
 

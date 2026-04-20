@@ -29,11 +29,12 @@
     "NO_DATA": "Any combat has not been registered yet."
   },
   "COMBAT": {
-    "TITLE": "Iniciar Combate",
-    "SELECT_OPPONENTS": "Selecciona los contendientes",
+    "TITLE": "Start Combat",
+    "SELECT_OPPONENTS": "Select the species",
     "VS": "VS",
-    "START_BUTTON": "¡Pelear!",
-    "WINNER": "¡El ganador es {{name}}!",
-    "ERROR_SAME_SPECIES": "No puedes hacer que una especie pelee contra sí misma."
+    "START_BUTTON": "¡Fight!",
+    "RANDOM_BUTTON": "¡Random Fight!",
+    "WINNER": "The winner is",
+    "ERROR_SAME_SPECIES": "No can make a species fight against itself."
   }
 }

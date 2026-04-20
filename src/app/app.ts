@@ -4,6 +4,7 @@ import {SpeciesList} from './components/species-list/species-list';
 import {SpeciesForm} from './components/species-form/species-form';
 import {TournamentRanking} from './components/tournament-ranking/tournament-ranking';
 import {TranslateModule, TranslateService} from '@ngx-translate/core';
+import {SpeciesCombat} from './components/species-combat/species-combat';
 
 @Component({
   selector: "app-root",
@@ -13,7 +14,8 @@ import {TranslateModule, TranslateService} from '@ngx-translate/core';
     SpeciesList,
     SpeciesForm,
     TournamentRanking,
-    CommonModule
+    CommonModule,
+    SpeciesCombat
   ],
   templateUrl: './app.html'
 })
