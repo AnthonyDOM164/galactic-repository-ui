@@ -8,7 +8,7 @@
         <div class="col-md-5">
           <select class="form-select" [(ngModel)]="id1">
             <option [ngValue]="undefined" disabled>{{ 'COMBAT.SELECT_OPPONENTS' | translate }}</option>
-            <option *ngFor="let s of speciesList" [ngValue]="s.id">{{ s.name }} (Pwr: {{ s.powerLevel }})</option>
+            <option *ngFor="let species of speciesList" [ngValue]="species.id">{{ species.name }} (Pwr: {{ species.powerLevel }})</option>
           </select>
         </div>
 
@@ -19,7 +19,7 @@
         <div class="col-md-5">
           <select class="form-select" [(ngModel)]="id2">
             <option [ngValue]="undefined" disabled>{{ 'COMBAT.SELECT_OPPONENTS' | translate }}</option>
-            <option *ngFor="let s of speciesList" [ngValue]="s.id">{{ s.name }} (Pwr: {{ s.powerLevel }})</option>
+            <option *ngFor="let species of speciesList" [ngValue]="species.id">{{ species.name }} (Pwr: {{ species.powerLevel }})</option>
           </select>
         </div>
       </div>

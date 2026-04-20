@@ -3,6 +3,7 @@
     "TITLE": "El Torneo Galáctico"
   },
   "SPECIES": {
+    "LIST_TITLE": "ESPECIES",
     "FORM_TITLE_ADD": "Registrar Nueva Especie",
     "FORM_TITLE_ADD_BUTTON": "REGISTRAR ESPECIE",
     "RANKING_TITTLE": "RANKING",

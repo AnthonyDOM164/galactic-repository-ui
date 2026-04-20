@@ -1,4 +1,4 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {SpeciesList} from './components/species-list/species-list';
 import {SpeciesForm} from './components/species-form/species-form';
@@ -22,9 +22,9 @@ import {SpeciesCombat} from './components/species-combat/species-combat';
 
 export class App {
   constructor(private translate: TranslateService) {
-  this.translate.addLangs(['es', 'en']);
-  this.translate.use('es');
-}
+    this.translate.addLangs(['es', 'en']);
+    this.translate.use('es');
+  }
 
   switchLanguage(lang: string) {
     this.translate.use(lang);

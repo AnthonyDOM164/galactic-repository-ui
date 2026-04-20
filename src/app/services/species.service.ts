@@ -1,25 +1,27 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { Species } from '../models/species.model';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, BehaviorSubject} from 'rxjs';
+import {Species} from '../models/species.model';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SpeciesService {
-  private apiUrl = 'https://galactic-repository-api.onrender.com/api/species';
+  private apiUrl = environment.apiUrl;
 
-  private refreshNeeded$ = new BehaviorSubject<void>(undefined)
+  private _refresh$ = new BehaviorSubject<void>(undefined);
+
+  constructor(private http: HttpClient) {
+  }
 
   get refresh$() {
-    return this.refreshNeeded$.asObservable();
+    return this._refresh$.asObservable();
   }
 
-  triggerRefresh() {
-    this.refreshNeeded$.next();
+  notifyRefresh() {
+    this._refresh$.next();
   }
-
-  constructor(private http: HttpClient) { }
 
   getSpecies(): Observable<Species[]> {
     return this.http.get<Species[]>(this.apiUrl);
@@ -33,8 +35,12 @@ export class SpeciesService {
     return this.http.post<Species>(this.apiUrl, species);
   }
 
-  startCombat(id1: number, id2: number): Observable<Species> {
+  startCombat(id1: number | undefined, id2: number | undefined): Observable<Species> {
     return this.http.post<Species>(`${this.apiUrl}/battle?id1=${id1}&id2=${id2}`, {});
+  }
+
+  startRandomCombat(): Observable<Species> {
+    return this.http.post<Species>(`${this.apiUrl}/battle/randomBattle`, {});
   }
 
 }

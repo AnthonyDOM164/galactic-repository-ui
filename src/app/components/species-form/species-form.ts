@@ -7,7 +7,11 @@ import {TranslateModule} from '@ngx-translate/core';
 @Component({
   selector: 'app-species-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,TranslateModule],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    TranslateModule
+  ],
   templateUrl: './species-form.html'
 })
 
@@ -29,7 +33,7 @@ export class SpeciesForm {
       this.loading = true;
       this.speciesService.registerSpecies(this.speciesForm.value).subscribe({
         next: () => {
-          this.speciesService.triggerRefresh();
+          this.speciesService.notifyRefresh();
           this.loading = false;
           this.speciesForm.reset({powerLevel: 150});
           this.speciesCreated.emit();

@@ -3,6 +3,7 @@
     "TITLE": "Galactic Tournament"
   },
   "SPECIES": {
+    "LIST_TITLE": "SPECIES",
     "FORM_TITLE_ADD": "Register New Species",
     "FORM_TITLE_ADD_BUTTON": "REGISTER SPECIES",
     "RANKING_TITTLE": "RANKING",

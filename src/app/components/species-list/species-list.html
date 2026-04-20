@@ -1,15 +1,15 @@
 <div class="container mt-4">
-  <h2 class="text-light mb-4">{{ 'SPECIES.LIST_TITLE' | translate }}</h2>
+  <h2 class="modal-title align-self-center">{{ 'SPECIES.LIST_TITLE' | translate }}</h2>
   <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let s of species">
+    <div class="col-md-4 mb-3" *ngFor="let species of species">
       <div class="card bg-dark text-white border-primary h-100">
         <div class="card-body text-center">
-          <h5 class="card-title text-info">{{ s.name }}</h5>
+          <h5 class="card-title text-info">{{ species.name }}</h5>
           <p class="card-text">
-            <strong>{{ 'SPECIES.FIELDS.POWER' | translate }}</strong> {{ s.powerLevel }} <br>
-            <small><strong>{{ 'SPECIES.FIELDS.SA' | translate }}</strong> {{ s.specialAbility }} <br></small>
+            <strong>{{ 'SPECIES.FIELDS.POWER' | translate }}</strong> {{ species.powerLevel }} <br>
+            <small><strong>{{ 'SPECIES.FIELDS.SA' | translate }}</strong> {{ species.specialAbility }} <br></small>
           </p>
-          <div class="badge bg-warning text-dark">{{ 'SPECIES.FIELDS.VICTORIES' | translate }}{{ s.victories }}</div>
+          <div class="badge bg-warning text-dark">{{ 'SPECIES.FIELDS.VICTORIES' | translate }}{{ species.victories }}</div>
         </div>
       </div>
     </div>
