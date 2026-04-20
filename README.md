@@ -1,59 +1,161 @@
-# GalacticTournamentUi
+# Galactic Tournament UI
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.7.
+Frontend del torneo galactico construido con Angular 21. La aplicacion permite registrar especies, ejecutar combates, consultar el ranking global y cambiar el idioma entre español e ingles.
 
-## Development server
+## Que hace la app
 
-To start a local development server, run:
+- Registra nuevas especies con nombre, nivel de poder y habilidad especial.
+- Muestra el listado completo de especies registradas.
+- Permite iniciar combates manuales o aleatorios.
+- Presenta el ranking ordenado por victorias.
+- Mantiene la UI sincronizada con el estado del backend usando un flujo reactivo.
 
-```bash
-ng serve
-```
+## Stack principal
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+- Angular 21 con componentes standalone
+- RxJS para manejo de flujos y estado compartido
+- Angular Signals para reflejar cambios en pantalla inmediatamente
+- Bootstrap 5 para estilos base
+- `@ngx-translate/core` para internacionalizacion
+- Vitest para pruebas unitarias
+- Compodoc para documentacion tecnica
 
-## Code scaffolding
+## Requisitos
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Node.js en una version par/LTS
+- npm
+- Backend disponible en local en `http://localhost:8080/api/species`
 
-```bash
-ng generate component component-name
-```
+En produccion, la app usa:
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- `https://galactic-repository-api.onrender.com/api/species`
 
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Instalacion y ejecucion local
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+Despues abre:
 
-For end-to-end (e2e) testing, run:
+```text
+http://localhost:4200/
+```
+
+## Scripts utiles
 
 ```bash
-ng e2e
+npm start
+npm run build
+npm test -- --watch=false
+npm run docs
 ```
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+## Flujo de sincronizacion de datos
 
-## Additional Resources
+El frontend no consume WebSocket directamente en este repositorio. La sincronizacion actual funciona asi:
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. `SpeciesService` mantiene dos flujos reactivos internos:
+   - `species$`
+   - `ranking$`
+2. Al iniciar la app, el servicio ejecuta `refreshAll()` para cargar especies y ranking.
+3. Cuando se registra una especie o termina un combate, el servicio vuelve a consultar la API.
+4. Los componentes consumen esos flujos con `toSignal(...)`, por lo que Angular vuelve a renderizar la vista apenas llegan nuevos datos.
+
+Esto evita que la pantalla dependa de una interaccion del usuario para refrescarse.
+
+## Endpoints esperados por el frontend
+
+```text
+GET    /api/species
+GET    /api/species/ranking
+POST   /api/species
+POST   /api/species/battle?id1={id1}&id2={id2}
+POST   /api/species/battle/randomBattle
+```
+
+## Estructura principal
+
+```text
+src/
+  app/
+    components/
+      species-form/
+      species-list/
+      species-combat/
+      tournament-ranking/
+    services/
+      species.service.ts
+    models/
+      species.model.ts
+  environments/
+    environment.ts
+    environment.prod.ts
+```
+
+## Componentes clave
+
+### `SpeciesForm`
+
+Formulario para crear nuevas especies. Maneja validaciones y estado de carga.
+
+### `SpeciesList`
+
+Renderiza el listado completo de especies usando estado reactivo.
+
+### `SpeciesCombat`
+
+Permite elegir dos especies para pelear o lanzar un combate aleatorio. Tambien muestra al ganador mas reciente.
+
+### `TournamentRanking`
+
+Presenta la tabla de posiciones ordenada por victorias.
+
+### `SpeciesService`
+
+Centraliza las llamadas HTTP y la sincronizacion global de `species$` y `ranking$`.
+
+## Internacionalizacion
+
+La app carga textos desde:
+
+```text
+public/assets/i18n/es.json
+public/assets/i18n/en.json
+```
+
+El idioma por defecto es `es`.
+
+## Pruebas
+
+Para ejecutar las pruebas unitarias:
+
+```bash
+npm test -- --watch=false
+```
+
+La suite actual cubre:
+
+- creacion de componentes
+- carga reactiva de especies y ranking
+- comportamiento base del servicio HTTP
+
+## Documentacion tecnica
+
+Para regenerar la documentacion de Compodoc:
+
+```bash
+npm run docs
+```
+
+Los archivos generados quedan en:
+
+```text
+documentation/
+```
+
+## Notas
+
+- Si el backend cambia de host o puerto en desarrollo, actualiza `src/environments/environment.ts`.
+- Si en el futuro integras WebSocket o SSE, el punto recomendado para enchufarlo es `SpeciesService`, publicando los nuevos datos a `species$` y `ranking$`.
