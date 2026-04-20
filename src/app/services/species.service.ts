@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, BehaviorSubject} from 'rxjs';
+import {Observable, BehaviorSubject, tap} from 'rxjs';
 import {Species} from '../models/species.model';
 import {environment} from '../../environments/environment';
 
@@ -14,24 +14,19 @@ import {environment} from '../../environments/environment';
 export class SpeciesService {
   private apiUrl = environment.apiUrl;
 
-  private _refresh$ = new BehaviorSubject<void>(undefined);
+  private _species$ = new BehaviorSubject<Species[]>([]);
+  private _ranking$ = new BehaviorSubject<Species[]>([]);
+
+  public species$ = this._species$.asObservable();
+  public ranking$ = this._ranking$.asObservable();
 
   constructor(private http: HttpClient) {
+    this.refreshAll();
   }
 
-  /**
-   * Observable stream that notifies subscribers when data needs to be reloaded.
-   * @returns {Observable<void>}
-   */
-  get refresh$() {
-    return this._refresh$.asObservable();
-  }
-
-  /**
-   * Emits a new value to the refresh stream to trigger UI updates.
-   */
-  notifyRefresh() {
-    this._refresh$.next();
+  refreshAll(): void {
+    this.getSpecies().subscribe(data => this._species$.next(data));
+    this.getRanking().subscribe(data => this._ranking$.next(data));
   }
 
   /**
@@ -56,7 +51,9 @@ export class SpeciesService {
    * @param {any} species - The species data to be saved.
    */
   registerSpecies(species: Partial<Species>): Observable<Species> {
-    return this.http.post<Species>(this.apiUrl, species);
+    return this.http.post<Species>(this.apiUrl, species).pipe(
+      tap(() => this.refreshAll())
+    );
   }
 
   /**
@@ -67,7 +64,9 @@ export class SpeciesService {
    * @returns {Observable<any>} Outcome of the battle including the winner.
    */
   startCombat(id1: number | undefined, id2: number | undefined): Observable<Species> {
-    return this.http.post<Species>(`${this.apiUrl}/battle?id1=${id1}&id2=${id2}`, {});
+    return this.http.post<Species>(`${this.apiUrl}/battle?id1=${id1}&id2=${id2}`, {}).pipe(
+      tap(() => this.refreshAll())
+    );
   }
 
   /**
@@ -76,7 +75,9 @@ export class SpeciesService {
    * @returns {Observable<any>} Outcome of the battle including the winner.
    */
   startRandomCombat(): Observable<Species> {
-    return this.http.post<Species>(`${this.apiUrl}/battle/randomBattle`, {});
+    return this.http.post<Species>(`${this.apiUrl}/battle/randomBattle`, {}).pipe(
+      tap(() => this.refreshAll())
+    );
   }
 
 }

@@ -1,4 +1,5 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, signal} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {TranslateModule} from '@ngx-translate/core';
@@ -18,37 +19,31 @@ import {Species} from '../../models/species.model';
   ],
   templateUrl: './species-combat.html'
 })
-export class SpeciesCombat implements OnInit {
-  speciesList: Species[] = [];
+export class SpeciesCombat {
+  private speciesService = inject(SpeciesService);
+
+  readonly speciesList = toSignal(this.speciesService.species$, {
+    initialValue: [] as Species[]
+  });
+  readonly winner = signal<Species | null>(null);
+  readonly loading = signal(false);
   id1?: number;
   id2?: number;
-  winner: any = null;
-  loading = false;
-
-  constructor(private speciesService: SpeciesService) {
-  }
-
-  /**
-   * Initializes the component by fetching the initial list of species.
-   */
-  ngOnInit() {
-    this.speciesService.getSpecies().subscribe(data => this.speciesList = data);
-  }
 
   /**
    * Validates and executes a combat between the two selected species.
    * @returns {void}
    */
   onFight() {
-    if (this.speciesList.length < 2) return;
+    if (this.speciesList().length < 2 || !this.id1 || !this.id2) return;
 
-    this.loading = true;
+    this.loading.set(true);
     this.speciesService.startCombat(this.id1, this.id2).subscribe({
       next: (res) => {
-        this.winner = res;
-        this.loading = false;
+        this.winner.set(res);
+        this.loading.set(false);
       },
-      error: () => this.loading = false
+      error: () => this.loading.set(false)
     });
   }
 
@@ -56,15 +51,15 @@ export class SpeciesCombat implements OnInit {
    * Selects two random different species and triggers a combat.
    */
   onRandomFight() {
-    if (this.speciesList.length < 2) return;
+    if (this.speciesList().length < 2) return;
 
-    this.loading = true;
+    this.loading.set(true);
     this.speciesService.startRandomCombat().subscribe({
       next: (res) => {
-        this.winner = res;
-        this.loading = false;
+        this.winner.set(res);
+        this.loading.set(false);
       },
-      error: () => this.loading = false
+      error: () => this.loading.set(false)
     });
   }
 }

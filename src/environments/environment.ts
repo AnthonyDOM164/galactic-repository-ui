@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://galactic-repository-api.onrender.com/api/species'
+  apiUrl: 'http://localhost:8080/api/species'
 };

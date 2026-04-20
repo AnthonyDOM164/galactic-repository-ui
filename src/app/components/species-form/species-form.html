@@ -33,10 +33,10 @@
                placeholder="{{ 'SPECIES.FIELDS_FORM_ADD.SA_PLACEHOLDER' | translate }}">
       </div>
 
-      <button type="submit" [disabled]="speciesForm.invalid || loading"
+      <button type="submit" [disabled]="speciesForm.invalid || loading()"
               class="btn btn-info w-100 fw-bold mt-2 py-2">
-        <span *ngIf="loading" class="spinner-border spinner-border-sm me-2"></span>
-        {{ (loading ? 'SPECIES.LOADING_BUTTON' : 'SPECIES.FORM_TITLE_ADD_BUTTON') | translate }}
+        <span *ngIf="loading()" class="spinner-border spinner-border-sm me-2"></span>
+        {{ (loading() ? 'SPECIES.LOADING_BUTTON' : 'SPECIES.FORM_TITLE_ADD_BUTTON') | translate }}
       </button>
     </form>
   </div>

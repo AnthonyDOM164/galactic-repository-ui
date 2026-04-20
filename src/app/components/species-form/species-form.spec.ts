@@ -11,7 +11,7 @@ describe('SpeciesForm Component', () => {
 
   beforeEach(async () => {
     speciesServiceMock = {
-      createSpecies: (data: any) => of({ id: 99, ...data })
+      registerSpecies: (data: any) => of({ id: 99, victories: 0, ...data })
     };
 
     await TestBed.configureTestingModule({

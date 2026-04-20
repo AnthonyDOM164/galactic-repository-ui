@@ -12,7 +12,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let s of ranking; let i = index">
+      <tr *ngFor="let s of ranking(); let i = index">
         <td class="ps-3">
             <span [ngClass]="{'gold': i===0, 'silver': i===1, 'bronze': i===2}">
               #{{ i + 1 }}
@@ -30,7 +30,7 @@
       </tr>
       </tbody>
     </table>
-    <div *ngIf="ranking.length === 0" class="p-4 text-center text-muted">
+    <div *ngIf="ranking().length === 0" class="p-4 text-center text-muted">
       {{ 'RANKING.NO_DATA' | translate }}
     </div>
   </div>

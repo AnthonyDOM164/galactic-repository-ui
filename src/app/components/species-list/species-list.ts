@@ -1,4 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {CommonModule} from '@angular/common';
 import {SpeciesService} from '../../services/species.service';
 import {Species} from '../../models/species.model';
@@ -17,26 +18,9 @@ import {TranslateModule} from '@ngx-translate/core';
   ],
   templateUrl: './species-list.html',
 })
-export class SpeciesList implements OnInit {
+export class SpeciesList {
   private speciesService = inject(SpeciesService);
-  species: Species[] = [];
-
-  /**
-   * Subscribes to the global refresh stream to trigger data reloads whenever
-   * a new species is added or a combat finishes.
-   */
-  ngOnInit(): void {
-    this.speciesService.refresh$.subscribe(() => {
-      this.loadSpecies();
-    });
-  }
-
-  /**
-   * Fetches the latest species data from the backend and updates the local state.
-   */
-  loadSpecies() {
-    this.speciesService.getSpecies().subscribe(data => {
-      this.species = data;
-    });
-  }
+  readonly species = toSignal(this.speciesService.species$, {
+    initialValue: [] as Species[]
+  });
 }

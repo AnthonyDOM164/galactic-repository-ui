@@ -1,4 +1,5 @@
-import {Component, OnInit, inject} from '@angular/core';
+import {Component, inject} from '@angular/core';
+import {toSignal} from '@angular/core/rxjs-interop';
 import {CommonModule} from '@angular/common';
 import {SpeciesService} from '../../services/species.service';
 import {Species} from '../../models/species.model';
@@ -17,24 +18,9 @@ import {TranslateModule} from '@ngx-translate/core';
   ],
   templateUrl: './tournament-ranking.html'
 })
-export class TournamentRanking implements OnInit {
+export class TournamentRanking {
   private speciesService = inject(SpeciesService);
-  ranking: Species[] = [];
-
-  /**
-   * Subscribes to the global refresh stream to keep the leaderboard updated in real-time.
-   */
-  ngOnInit(): void {
-    this.loadRanking();
-    this.speciesService.refresh$.subscribe(() => {
-      this.loadRanking();
-    });
-  }
-
-  /**
-   * Fetches the official ranking from the API and updates the view.
-   */
-  loadRanking(): void {
-    this.speciesService.getRanking().subscribe(data => this.ranking = data);
-  }
+  readonly ranking = toSignal(this.speciesService.ranking$, {
+    initialValue: [] as Species[]
+  });
 }

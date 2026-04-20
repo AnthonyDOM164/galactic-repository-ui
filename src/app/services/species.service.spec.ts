@@ -8,6 +8,11 @@ describe('SpeciesService', () => {
   let service: SpeciesService;
   let httpMock: HttpTestingController;
 
+  const flushInitialRefresh = () => {
+    httpMock.expectOne(environment.apiUrl).flush([]);
+    httpMock.expectOne(`${environment.apiUrl}/ranking`).flush([]);
+  };
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
@@ -19,6 +24,7 @@ describe('SpeciesService', () => {
 
     service = TestBed.inject(SpeciesService);
     httpMock = TestBed.inject(HttpTestingController);
+    flushInitialRefresh();
   });
 
   afterEach(() => {

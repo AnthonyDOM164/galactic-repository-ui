@@ -11,8 +11,7 @@ describe('SpeciesList Component', () => {
 
   beforeEach(async () => {
     speciesServiceMock = {
-      refresh$: of(undefined),
-      getSpecies: () => of([
+      species$: of([
         { id: 1, name: 'Humano', powerLevel: 260, specialAbility: 'Super fuerza', victories: 0 }
       ])
     };
@@ -38,7 +37,7 @@ describe('SpeciesList Component', () => {
   });
 
   it('debería cargar las especies al iniciar (ngOnInit)', () => {
-    expect(component.species.length).toBe(1);
-    expect(component.species[0].name).toBe('Humano');
+    expect(component.species().length).toBe(1);
+    expect(component.species()[0].name).toBe('Humano');
   });
 });

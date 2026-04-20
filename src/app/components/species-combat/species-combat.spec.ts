@@ -11,12 +11,23 @@ describe('SpeciesCombat Component', () => {
 
   beforeEach(async () => {
     speciesServiceMock = {
-      getSpecies: () => of([
+      species$: of([
         { id: 1, name: 'Humano', powerLevel: 250, specialAbility: 'Super fuerza', victories: 0 },
         { id: 2, name: 'Robot', powerLevel: 250, specialAbility: 'Super inteligencia', victories: 0 }
       ]),
       startCombat: () => of({
-        winner: { id: 1, name: 'Humano', powerLevel: 250 }
+        id: 1,
+        name: 'Humano',
+        powerLevel: 250,
+        specialAbility: 'Super fuerza',
+        victories: 1
+      }),
+      startRandomCombat: () => of({
+        id: 2,
+        name: 'Robot',
+        powerLevel: 250,
+        specialAbility: 'Super inteligencia',
+        victories: 1
       })
     };
 
@@ -40,6 +51,6 @@ describe('SpeciesCombat Component', () => {
   });
 
   it('debería cargar la lista de especies para combatir', () => {
-    expect(component.speciesList.length).toBe(2);
+    expect(component.speciesList().length).toBe(2);
   });
 });

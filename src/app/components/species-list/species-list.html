@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <h2 class="modal-title align-self-center">{{ 'SPECIES.LIST_TITLE' | translate }}</h2>
   <div class="row">
-    <div class="col-md-4 mb-3" *ngFor="let species of species">
+    <div class="col-md-4 mb-3" *ngFor="let species of species()">
       <div class="card bg-dark text-white border-primary h-100">
         <div class="card-body text-center">
           <h5 class="card-title text-info">{{ species.name }}</h5>

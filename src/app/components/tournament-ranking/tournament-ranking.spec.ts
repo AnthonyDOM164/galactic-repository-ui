@@ -11,10 +11,9 @@ describe('TournamentRanking Component', () => {
 
   beforeEach(async () => {
     speciesServiceMock = {
-      refresh$: of(undefined),
-      getRanking: () => of([
-        { speciesName: 'Humano', victories: 15 },
-        { speciesName: 'Robot', victories: 3 }
+      ranking$: of([
+        { id: 1, name: 'Humano', powerLevel: 260, specialAbility: 'Super fuerza', victories: 15 },
+        { id: 2, name: 'Robot', powerLevel: 180, specialAbility: 'Super inteligencia', victories: 3 }
       ])
     };
 
@@ -38,7 +37,7 @@ describe('TournamentRanking Component', () => {
   });
 
   it('debería cargar el ranking al iniciar', () => {
-    expect(component.ranking.length).toBe(2);
-    expect(component.ranking[0].victories).toBe(15);
+    expect(component.ranking().length).toBe(2);
+    expect(component.ranking()[0].victories).toBe(15);
   });
 });
