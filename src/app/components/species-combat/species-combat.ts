@@ -5,10 +5,17 @@ import {TranslateModule} from '@ngx-translate/core';
 import {SpeciesService} from '../../services/species.service';
 import {Species} from '../../models/species.model';
 
+/**
+ * Component that facilitates manual and random combats between species.
+ */
 @Component({
   selector: 'app-species-combat',
   standalone: true,
-  imports: [CommonModule, FormsModule, TranslateModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    TranslateModule
+  ],
   templateUrl: './species-combat.html'
 })
 export class SpeciesCombat implements OnInit {
@@ -21,10 +28,17 @@ export class SpeciesCombat implements OnInit {
   constructor(private speciesService: SpeciesService) {
   }
 
+  /**
+   * Initializes the component by fetching the initial list of species.
+   */
   ngOnInit() {
     this.speciesService.getSpecies().subscribe(data => this.speciesList = data);
   }
 
+  /**
+   * Validates and executes a combat between the two selected species.
+   * @returns {void}
+   */
   onFight() {
     if (this.speciesList.length < 2) return;
 
@@ -38,6 +52,9 @@ export class SpeciesCombat implements OnInit {
     });
   }
 
+  /**
+   * Selects two random different species and triggers a combat.
+   */
   onRandomFight() {
     if (this.speciesList.length < 2) return;
 

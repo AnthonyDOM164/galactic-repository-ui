@@ -19,7 +19,6 @@ import {SpeciesCombat} from './components/species-combat/species-combat';
   ],
   templateUrl: './app.html'
 })
-
 export class App {
   constructor(private translate: TranslateService) {
     this.translate.addLangs(['es', 'en']);

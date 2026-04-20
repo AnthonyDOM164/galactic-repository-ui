@@ -4,6 +4,10 @@ import {FormBuilder, FormGroup, Validators, ReactiveFormsModule} from '@angular/
 import {SpeciesService} from '../../services/species.service';
 import {TranslateModule} from '@ngx-translate/core';
 
+/**
+ * Component providing the form interface to register a new galactic species.
+ * Includes validation and handles API submission state.
+ */
 @Component({
   selector: 'app-species-form',
   standalone: true,
@@ -14,7 +18,6 @@ import {TranslateModule} from '@ngx-translate/core';
   ],
   templateUrl: './species-form.html'
 })
-
 export class SpeciesForm {
   private fb = inject(FormBuilder);
   private speciesService = inject(SpeciesService);
@@ -28,6 +31,11 @@ export class SpeciesForm {
     specialAbility: ['', [Validators.required, Validators.maxLength(50)]]
   });
 
+  /**
+   * Validates the form data and sends a request to register a new species.
+   * Resets the form upon successful creation.
+   * @returns {void}
+   */
   onSubmit() {
     if (this.speciesForm.valid) {
       this.loading = true;
