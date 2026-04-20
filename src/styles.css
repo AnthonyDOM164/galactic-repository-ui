@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+.gold {
+  color: #FFD700 !important;
+  font-weight: 900;
+  font-size: 1.2rem;
+  text-shadow: 1px 1px 4px rgba(255, 215, 0, 0.5);
+}
+
+.silver {
+  color: #C0C0C0 !important;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.bronze {
+  color: #CD7F32 !important;
+  font-weight: bold;
+  font-size: 1.1rem;
+}

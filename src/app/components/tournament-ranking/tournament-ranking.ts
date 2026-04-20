@@ -15,23 +15,7 @@ import {TranslateModule} from '@ngx-translate/core';
     CommonModule,
     TranslateModule
   ],
-  templateUrl: './tournament-ranking.html',
-  styles: [`
-    .gold {
-      color: #ffd700;
-      font-weight: bold;
-    }
-
-    .silver {
-      color: #c0c0c0;
-      font-weight: bold;
-    }
-
-    .bronze {
-      color: #cd7f32;
-      font-weight: bold;
-    }
-  `]
+  templateUrl: './tournament-ranking.html'
 })
 export class TournamentRanking implements OnInit {
   private speciesService = inject(SpeciesService);
