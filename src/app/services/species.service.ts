@@ -11,6 +11,14 @@ export class SpeciesService {
 
   private refreshNeeded$ = new BehaviorSubject<void>(undefined)
 
+  get refresh$() {
+    return this.refreshNeeded$.asObservable();
+  }
+
+  triggerRefresh() {
+    this.refreshNeeded$.next();
+  }
+
   constructor(private http: HttpClient) { }
 
   getSpecies(): Observable<Species[]> {
@@ -27,14 +35,6 @@ export class SpeciesService {
 
   battle(id1: number, id2: number): Observable<Species> {
     return this.http.post<Species>(`${this.apiUrl}/battle?id1=${id1}&id2=${id2}`, {});
-  }
-
-  get refresh$() {
-    return this.refreshNeeded$.asObservable();
-  }
-
-  triggerRefresh() {
-    this.refreshNeeded$.next();
   }
 
 }

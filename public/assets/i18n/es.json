@@ -21,5 +21,19 @@
       "VICTORIES": "Victorias: ",
       "SA": "Habilidad Especial: "
     }
+  },
+  "RANKING": {
+    "TITLE": "RANKING",
+    "COLUMN_NAME": "Especie",
+    "COLUMN_VICTORIES": "Victorias",
+    "NO_DATA": "No hay combates registrados aún."
+  },
+  "COMBAT": {
+    "TITLE": "Iniciar Combate",
+    "SELECT_OPPONENTS": "Selecciona los contendientes",
+    "VS": "VS",
+    "START_BUTTON": "¡Pelear!",
+    "WINNER": "¡El ganador es {{name}}!",
+    "ERROR_SAME_SPECIES": "No puedes hacer que una especie pelee contra sí misma."
   }
 }
